@@ -13,7 +13,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:src="@mipmap/me" />
+            android:src="@drawable/me" />
 
     </LinearLayout>
 
@@ -26,7 +26,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:src="@mipmap/location" />
+            android:src="@drawable/location" />
 
 
     </LinearLayout>
@@ -40,7 +40,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:src="@mipmap/search" />
+            android:src="@drawable/search" />
     </LinearLayout>
 
 </LinearLayout>
