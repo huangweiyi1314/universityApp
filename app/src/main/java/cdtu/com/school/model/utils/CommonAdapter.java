@@ -9,7 +9,9 @@ import android.widget.BaseAdapter;
 import java.util.List;
 
 /**
+ *
  * Created by huangjie on 2016/4/12.
+ *
  */
 public abstract class CommonAdapter<T> extends BaseAdapter {
     private Context mcontext;
