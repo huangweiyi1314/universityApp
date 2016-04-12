@@ -6,19 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import java.io.PipedOutputStream;
 import java.util.List;
 
 /**
  * Created by huangjie on 2016/4/12.
  */
-public  abstract class CommonAdapter<T> extends BaseAdapter {
+public abstract class CommonAdapter<T> extends BaseAdapter {
     private Context mcontext;
     private LayoutInflater mInflater;
     private List<T> mDatas;
     private int mLayoutID;//布局文件的ID
 
-    public CommonAdapter(Context mcontext,List<T> mDatas,int LayoutId) {
+    public CommonAdapter(Context mcontext, List<T> mDatas, int LayoutId) {
         this.mcontext = mcontext;
         mInflater = LayoutInflater.from(mcontext);
         this.mDatas = mDatas;
@@ -42,17 +41,18 @@ public  abstract class CommonAdapter<T> extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-      ViewHolder holder = ViewHolder.getInstance(mcontext, convertView, mLayoutID, position, parent);
+        ViewHolder holder = ViewHolder.getInstance(mcontext, convertView, mLayoutID, position, parent);
 
-        convert(holder,getItem(position));
+        convert(holder, getItem(position));
 
         return holder.getConvertView();
     }
 
     /**
      * 给每个item中的View赋值
+     *
      * @param holder
      * @param t
      */
-    public abstract  void convert(ViewHolder holder,T t);
+    public abstract void convert(ViewHolder holder, T t);
 }
