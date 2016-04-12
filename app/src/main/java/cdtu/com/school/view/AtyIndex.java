@@ -1,14 +1,14 @@
-package cdtu.com.school;
+package cdtu.com.school.view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-public class MainActivity extends AppCompatActivity {
 
+/**
+ * Created by huangjie on 2016/4/12.
+ */
+public class AtyIndex extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.aty_index);
-
     }
-
 }
