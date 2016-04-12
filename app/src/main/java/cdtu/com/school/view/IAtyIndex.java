@@ -5,4 +5,5 @@ package cdtu.com.school.view;
  */
 public interface  IAtyIndex {
     public void  showLocationSchool();
+    public void   toStartOtherAty();
 }
