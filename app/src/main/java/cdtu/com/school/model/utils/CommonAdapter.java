@@ -14,7 +14,7 @@ import java.util.List;
 public abstract class CommonAdapter<T> extends BaseAdapter {
     private Context mcontext;
     private LayoutInflater mInflater;
-    private List<T> mDatas;
+    private List<T> mDatas;//数据源
     private int mLayoutID;//布局文件的ID
 
     public CommonAdapter(Context mcontext, List<T> mDatas, int LayoutId) {
