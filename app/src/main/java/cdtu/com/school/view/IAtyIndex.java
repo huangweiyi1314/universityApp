@@ -9,7 +9,9 @@ public interface IAtyIndex {
 
     //打开其它acitivity
     public void toStartOtherAty();
+    public void changeAdapter();//改变Adapter
+    public void replaceView();//替换View
+    public void restoreView();//复原View
 
-    public void changeAdapter();
 
 }

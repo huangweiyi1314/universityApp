@@ -7,13 +7,17 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.util.Timer;
+
 import cdtu.com.school.R;
+import cdtu.com.school.model.utils.NetConnection;
 
 /**
  * Created by huangjie on 2016/4/12.
@@ -84,7 +88,6 @@ public class AtyIndex extends AppCompatActivity implements Animation.AnimationLi
         mLinearlayoutMe = (LinearLayout) findViewById(R.id.id_Atyindex_Li_me);
         mLinearlayoutMovie = (LinearLayout) findViewById(R.id.id_Atyindex_Li_movies);
         mLinearlayoutLocation = (LinearLayout) findViewById(R.id.id_Atyindex_Li_location);
-
         mOnTouchLitener = new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -96,6 +99,7 @@ public class AtyIndex extends AppCompatActivity implements Animation.AnimationLi
                         lastY = (int) event.getRawY();
                         break;
                     case MotionEvent.ACTION_MOVE:
+
                         TranslateAnimation animation = new TranslateAnimation(0, 200, 0, 0);
                         animation.setDuration(200);
                         animation.setFillAfter(true);
