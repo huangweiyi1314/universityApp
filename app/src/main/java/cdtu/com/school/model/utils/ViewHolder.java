@@ -105,4 +105,8 @@ public class ViewHolder {
         return  this;
     }
 
+    public int getPosition(){
+        return  mPosition;
+    }
+
 }

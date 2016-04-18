@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+android:background="@drawable/aty_index_bg"
     android:orientation="horizontal">
 
     <include layout="@layout/at_index_left"></include>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:backgroundTint="#00000055"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/aty_index_listview_item_bg"
+    android:layout_height="140dp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/id_Atyindex_listview_item_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:riv_corner_radius="30dp"
+        android:src="@drawable/img"
+        android:scaleType="fitXY"
+        />
+   <!-- <ImageView
+        android:id="@+id/id_Atyindex_listview_item_iv"
+        android:layout_width="match_parent"
+        android:src="@drawable/img1"
+        android:background="@drawable/imageview_bg"
+        android:alpha="0.8"
+        android:scaleType="fitXY"
+        android:layout_height="match_parent" />-->
+    <TextView
+        android:id="@+id/id_Atyindex_listview_item_tvName"
+        android:layout_width="wrap_content"
+        android:layout_gravity="right|top"
+        android:text="极客学院"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/id_Atyindex_listview_item_tvdes"
+        android:layout_width="wrap_content"
+        android:text="中国最大的教育平台"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        />
+
+
+
+</FrameLayout>
