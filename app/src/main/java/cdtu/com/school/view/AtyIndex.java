@@ -167,7 +167,7 @@ public class AtyIndex extends AppCompatActivity {
                     case MotionEvent.ACTION_MOVE:
                         Log.i("huangjie", v.getId() + "");
 
-                        if (event.getRawX() - lastX > 8) {
+                        if (event.getRawX() - lastX > 8 && v.getVisibility() == View.VISIBLE) {
                             v.startAnimation(animation);
                             lastX = 0;
                         }
@@ -182,7 +182,7 @@ public class AtyIndex extends AppCompatActivity {
                                 if (((v.getId() != R.id.id_Atyindex_img_me)
                                         && (v.getId() != R.id.id_Atyindex_img_search)
                                         && (v.getId() != R.id.id_Atyindex_img_location))) {
-                                    v.setVisibility(View.INVISIBLE);
+                                    v.setVisibility(View.GONE);
                                 }
 
                             }
