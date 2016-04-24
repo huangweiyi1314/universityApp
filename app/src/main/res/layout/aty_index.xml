@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/aty_index_bg"
     android:gravity="center"
-android:background="@drawable/aty_index_bg"
-    android:orientation="horizontal">
+   >
 
     <include layout="@layout/at_index_left"></include>
 
     <include layout="@layout/aty_index_right"></include>
 
-</LinearLayout>
+</FrameLayout>

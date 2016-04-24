@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -53,6 +52,8 @@ public class AtyIndex extends AppCompatActivity {
     private List<View> mViewPagerImageView;
     private List<Hotel> datas;
     private int lastX;//记录当按下的时候的位置
+    private LinearLayout.LayoutParams params;
+    private int firstDownLeftMargin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +126,7 @@ public class AtyIndex extends AppCompatActivity {
     }
 
     /**
-     * 初始化V
+     * 初始化View
      */
     private void initView() {
         mViewPagerImageView = new ArrayList<>();
@@ -149,24 +150,22 @@ public class AtyIndex extends AppCompatActivity {
         mLinearlayoutLocation = (LinearLayout) findViewById(R.id.id_Atyindex_Li_location);
         mRightListview = (ListView) findViewById(R.id.id_Atyindex_listview);
         mViewPager = (ViewPager) findViewById(R.id.id_Atyindex_viewpager);
-        mOnTouchLitener = new View.OnTouchListener() {
+       /* mOnTouchLitener = new View.OnTouchListener() {
             @Override
             public boolean onTouch(final View v, MotionEvent event) {
-                TranslateAnimation animation = new TranslateAnimation(0, 200, 0, 0);
-                animation.setDuration(200);
 
-                if (((v.getId() != R.id.id_Atyindex_img_me)
-                        && (v.getId() != R.id.id_Atyindex_img_search)
-                        && (v.getId() != R.id.id_Atyindex_img_location))) {
-                    animation.setFillAfter(true);
-                }
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         lastX = (int) event.getRawX();
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        Log.i("huangjie", v.getId() + "");
-
+                        TranslateAnimation animation = new TranslateAnimation(0, event.getRawX(), 0, 0);
+                        animation.setDuration(200);
+                        if (((v.getId() != R.id.id_Atyindex_img_me)
+                                && (v.getId() != R.id.id_Atyindex_img_search)
+                                && (v.getId() != R.id.id_Atyindex_img_location))) {
+                            animation.setFillAfter(true);
+                        }
                         if (event.getRawX() - lastX > 8 && v.getVisibility() == View.VISIBLE) {
                             v.startAnimation(animation);
                             lastX = 0;
@@ -195,6 +194,43 @@ public class AtyIndex extends AppCompatActivity {
                         break;
                     case MotionEvent.ACTION_UP:
                         break;
+                }
+                return true;
+            }
+        };*/
+        mOnTouchLitener = new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int x = (int) event.getRawX();
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        Log.i("huangjie", "ACTION_DOWN 执行了");
+                        params = (LinearLayout.LayoutParams) v.getLayoutParams();
+                        firstDownLeftMargin = params.leftMargin;
+                        lastX = (x - params.leftMargin);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        Log.i("huangjie", "ACTION_UP执行了");
+                        if (v.getId() == R.id.id_Atyindex_img_me
+                                || v.getId() == R.id.id_Atyindex_img_search
+                                || v.getId() == R.id.id_Atyindex_img_location) {
+                            params.leftMargin = firstDownLeftMargin;
+
+                            v.setLayoutParams(params);
+                            params = null;
+
+                        }else if(event.getRawX()-lastX>80){
+                            v.setVisibility(View.INVISIBLE);
+                        }
+
+
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) v.getLayoutParams();
+                        params1.leftMargin = x - lastX;
+                        v.setLayoutParams(params1);
+                        break;
+
                 }
                 return true;
             }
