@@ -15,7 +15,6 @@ public class AtyIndexPresenter {
       AtyIndexPresenter(IAtyIndex AtyIndex){
         this.atyIndex = atyIndex;
           atyIndexBiz = new AtyIndexBizImp();
-
       }
     public void replaceAdapter(){
         ListView listView = (ListView) atyIndex.getView();
