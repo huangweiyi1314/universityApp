@@ -10,6 +10,7 @@ import com.baidu.location.LocationClientOption;
 import cdtu.com.school.model.instance.Instance;
 import cdtu.com.school.model.utils.NetConnection;
 import cdtu.com.school.model.utils.SchoolApplication;
+import cdtu.com.school.model.utils.ToastUtils;
 
 /**
  * Created by huangjie on 2016/4/13.
@@ -24,7 +25,7 @@ public class AtyIndexBizImp implements IAtyIndexBiz, BDLocationListener {
         setLocation();
         mLocationClient.registerLocationListener(this);
         mLocationClient.start();
-        return null;
+        return locationCity;
     }
 
     /**
@@ -43,29 +44,31 @@ public class AtyIndexBizImp implements IAtyIndexBiz, BDLocationListener {
 
     @Override
     public String getLocationUniversity(String location) {
-
+        //new NetConnection();
         return null;
     }
 
     @Override
-    public void getData(NetConnection.netSuccessCallBack successCallBack, NetConnection.netFailCallBack failCallBack, String... parmas) {
-
-        new NetConnection(parmas[0], successCallBack, failCallBack);
-
+    public void getData(String url) {
+         /*  new NetConnection(url, new NetConnection.netSuccessCallBack() {
+               @Override
+               public void Success(String result) {
+                 Log.i("huangjie","<<<<<<<<<<<<<<"+result);
+               }
+           }, new NetConnection.netFailCallBack() {
+               @Override
+               public void Failed() {
+                   ToastUtils.show("请检查你的网络");
+               }
+           });*/
     }
 
-
-    @Override
-    public void addUnisersity(String city, String universityName) {
-        Instance.addUnisersityDb(city, universityName);
-
-    }
 
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
         if (bdLocation != null) {
             locationCity = bdLocation.getCity();
-            Log.i("huangie", "location_address" + bdLocation.getAddress());
+            Log.i("huangie", "location_address" + locationCity);
         }
 
     }

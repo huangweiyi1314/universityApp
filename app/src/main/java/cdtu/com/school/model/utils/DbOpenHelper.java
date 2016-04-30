@@ -2,7 +2,6 @@ package cdtu.com.school.model.utils;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import cdtu.com.school.model.instance.Instance;
 
 /**

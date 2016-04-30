@@ -18,9 +18,7 @@ public class AtyIndexPresenter {
 
       }
     public void replaceAdapter(){
-        ListView listView = (ListView) atyIndex.getView();
-       // listView.setAdapter();
-         atyIndex.InvaliedVIew();
+
     }
 
 }

@@ -1,5 +1,6 @@
 package cdtu.com.school.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -8,26 +9,28 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cdtu.com.school.R;
 import cdtu.com.school.model.bean.Hotel;
 import cdtu.com.school.model.biz.AtyIndexBizImp;
 import cdtu.com.school.model.instance.Instance;
 import cdtu.com.school.model.utils.CommonAdapter;
+import cdtu.com.school.model.utils.HttpMethod;
+import cdtu.com.school.model.utils.NetConnection;
 import cdtu.com.school.model.utils.SchoolApplication;
 import cdtu.com.school.model.utils.ViewHolder;
 
 /**
  * Created by huangjie on 2016/4/12.
  */
-public class AtyIndex extends AppCompatActivity {
+public class AtyIndex extends AppCompatActivity implements IAtyIndex {
     private ImageView mfoodImg;
     private ImageView mMovieImg;
     private ImageView mSceneryImg;
@@ -62,7 +65,25 @@ public class AtyIndex extends AppCompatActivity {
         testData();
         initView();
         initevent();
+        Map<String,String> params = new HashMap<String,String>();
+        params.put("method","login");
+        params.put("username","a");
+        params.put("password","a");
+        params.put("from","e73aa629aa9d40e8b7073ee8f7f0d58e");
+        String home_url="http://ipoter.cn/lifeapp";
+        String img_url="http://ipoter.cn";
+        Log.i("----","---"+home_url);
+        new NetConnection(home_url+"/user",HttpMethod.POST, new NetConnection.netSuccessCallBack() {
+            @Override
+            public void Success(String result) {
+               Log.i("huangjie","<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<黄杰"+result);
+            }
+        }, new NetConnection.netFailCallBack() {
+            @Override
+            public void Failed() {
 
+            }
+        },params);
 
     }
 
@@ -96,7 +117,7 @@ public class AtyIndex extends AppCompatActivity {
             @Override
             public Object instantiateItem(ViewGroup container, int position) {
                 ImageView imageView = new ImageView(SchoolApplication.getContext());
-                imageView.setImageResource(R.drawable.img6);
+                imageView.setImageResource(R.drawable.img3);
                 imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                 container.addView(imageView);
                 mViewPagerImageView.add(imageView);
@@ -150,54 +171,6 @@ public class AtyIndex extends AppCompatActivity {
         mLinearlayoutLocation = (LinearLayout) findViewById(R.id.id_Atyindex_Li_location);
         mRightListview = (ListView) findViewById(R.id.id_Atyindex_listview);
         mViewPager = (ViewPager) findViewById(R.id.id_Atyindex_viewpager);
-       /* mOnTouchLitener = new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(final View v, MotionEvent event) {
-
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        lastX = (int) event.getRawX();
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        TranslateAnimation animation = new TranslateAnimation(0, event.getRawX(), 0, 0);
-                        animation.setDuration(200);
-                        if (((v.getId() != R.id.id_Atyindex_img_me)
-                                && (v.getId() != R.id.id_Atyindex_img_search)
-                                && (v.getId() != R.id.id_Atyindex_img_location))) {
-                            animation.setFillAfter(true);
-                        }
-                        if (event.getRawX() - lastX > 8 && v.getVisibility() == View.VISIBLE) {
-                            v.startAnimation(animation);
-                            lastX = 0;
-                        }
-                        animation.setAnimationListener(new Animation.AnimationListener() {
-                            @Override
-                            public void onAnimationStart(Animation animation) {
-
-                            }
-
-                            @Override
-                            public void onAnimationEnd(Animation animation) {
-                                if (((v.getId() != R.id.id_Atyindex_img_me)
-                                        && (v.getId() != R.id.id_Atyindex_img_search)
-                                        && (v.getId() != R.id.id_Atyindex_img_location))) {
-                                    v.setVisibility(View.GONE);
-                                }
-
-                            }
-
-                            @Override
-                            public void onAnimationRepeat(Animation animation) {
-
-                            }
-                        });
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        break;
-                }
-                return true;
-            }
-        };*/
         mOnTouchLitener = new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -215,26 +188,76 @@ public class AtyIndex extends AppCompatActivity {
                                 || v.getId() == R.id.id_Atyindex_img_search
                                 || v.getId() == R.id.id_Atyindex_img_location) {
                             params.leftMargin = firstDownLeftMargin;
-
                             v.setLayoutParams(params);
                             params = null;
-
-                        }else if(event.getRawX()-lastX>80){
+                        } else if (event.getRawX() - lastX > 10) {
                             v.setVisibility(View.INVISIBLE);
+
+                        } else if (event.getRawX() - lastX < 0) {
+                            params.leftMargin = firstDownLeftMargin;
+                            v.setLayoutParams(params);
+                            params = null;
                         }
-
-
                         break;
                     case MotionEvent.ACTION_MOVE:
                         LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) v.getLayoutParams();
                         params1.leftMargin = x - lastX;
                         v.setLayoutParams(params1);
                         break;
-
                 }
+                //跳转到其它activity
+              //  enterOtherAty(v);
                 return true;
             }
         };
+    }
+
+    @Override
+    public void showLocationSchool() {
 
     }
+
+    @Override
+    public void enterOtherAty(View v) {
+        Intent intent = new Intent();
+        switch (v.getId()) {
+            case R.id.id_Atyindex_img_me:
+                intent.setClass(AtyIndex.this, AtyMe.class);
+                startActivity(intent);
+                break;
+            case R.id.id_Atyindex_img_location:
+
+                break;
+            case R.id.id_Atyindex_img_search:
+
+                break;
+            case R.id.id_Atyindex_img_food:
+                intent.setClass(AtyIndex.this, AtyFood.class);
+                startActivity(intent);
+                break;
+            case R.id.id_Atyindex_img_movies:
+                intent.setClass(AtyIndex.this, AtyMovies.class);
+                startActivity(intent);
+                break;
+            case R.id.id_Atyindex_img_forum:
+                intent.setClass(AtyIndex.this, AtyForum.class);
+                startActivity(intent);
+                break;
+            case R.id.id_Atyindex_img_scenery:
+                intent.setClass(AtyIndex.this, AtyScenery.class);
+                startActivity(intent);
+                break;
+            case R.id.id_Atyindex_img_hotal:
+                intent.setClass(AtyIndex.this, AtyHotal.class);
+                startActivity(intent);
+                break;
+            case R.id.id_Atyindex_img_nearly:
+                intent.setClass(AtyIndex.this, AtyNearly.class);
+                startActivity(intent);
+                break;
+
+        }
+    }
+
+
 }

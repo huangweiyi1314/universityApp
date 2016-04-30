@@ -5,13 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-
 import java.util.List;
 
 /**
- *
  * Created by huangjie on 2016/4/12.
- *
  */
 public abstract class CommonAdapter<T> extends BaseAdapter {
     private Context mcontext;
@@ -44,7 +41,6 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = ViewHolder.getInstance(mcontext, convertView, mLayoutID, position, parent);
-
         convert(holder, getItem(position));
 
         return holder.getConvertView();
